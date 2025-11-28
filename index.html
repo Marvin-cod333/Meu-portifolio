@@ -1,108 +1,773 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfólio - Marvin Daniel</title>
+    <title>Marvin Daniel Cossa | Desenvolvedor Full Stack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header>
+    <!-- Cursor Personalizado -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-shape"></div>
+                <div class="logo-shape"></div>
+                <div class="logo-shape"></div>
+            </div>
+            <div class="loading-text">
+                <span class="loading-char">C</span>
+                <span class="loading-char">A</span>
+                <span class="loading-char">R</span>
+                <span class="loading-char">R</span>
+                <span class="loading-char">E</span>
+                <span class="loading-char">G</span>
+                <span class="loading-char">A</span>
+                <span class="loading-char">N</span>
+                <span class="loading-char">D</span>
+                <span class="loading-char">O</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#hero" class="logo-link">
+                    <span class="logo-text">MDC</span>
+                </a>
+            </div>
+            
+            <div class="nav-menu" id="navMenu">
+                <div class="nav-links">
+                    <a href="#hero" class="nav-link" data-text="Início">Início</a>
+                    <a href="#sobre" class="nav-link" data-text="Sobre">Sobre</a>
+                    <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
+                    <a href="#projetos" class="nav-link" data-text="Projetos">Projetos</a>
+                    <a href="#experiencia" class="nav-link" data-text="Experiência">Experiência</a>
+                    <a href="#contato" class="nav-link" data-text="Contato">Contato</a>
+                </div>
+                
+                <div class="nav-actions">
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="#contato" class="btn-primary nav-cta">Vamos conversar</a>
+                </div>
+            </div>
+
+            <div class="nav-hamburger" id="navHamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="badge-text">Disponível para oportunidades</span>
+                    <div class="badge-pulse"></div>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-line">Marvin Daniel</span>
+                    <span class="title-line">Cossa</span>
+                </h1>
+                
+                <p class="hero-description">
+                    Sou <strong>Estudante de Informática</strong> e <strong>Desenvolvedor Full Stack</strong> 
+                    apaixonado por criar soluções digitais que unem tecnologia, design e funcionalidade.
+                </p>
+                
+                <div class="hero-actions">
+                    <a href="#projetos" class="btn-primary">
+                        <span>Ver Projetos</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contato" class="btn-secondary">
+                        <span>Entrar em Contato</span>
+                        <i class="fas fa-paper-plane"></i>
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="10">0</div>
+                        <div class="stat-label">Projetos Concluídos</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="2">0</div>
+                        <div class="stat-label">Anos de Estudo</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="2">0</div>
+                        <div class="stat-label">Idiomas</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="floating-card card-1">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Desenvolvimento</h4>
+                        <p>Java, PHP, JavaScript</p>
+                    </div>
+                </div>
+                
+                <div class="floating-card card-2">
+                    <div class="card-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Bases de Dados</h4>
+                        <p>MySQL, CRUD</p>
+                    </div>
+                </div>
+                
+                <div class="floating-card card-3">
+                    <div class="card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="card-content">
+                        <h4>Eletricidade</h4>
+                        <p>Instalações industriais</p>
+                    </div>
+                </div>
+                
+                <div class="hero-avatar">
+                    <div class="avatar-container">
+                        <div class="avatar-image">
+                            <div class="avatar-shape"></div>
+                            <div class="avatar-shape"></div>
+                            <div class="avatar-shape"></div>
+                        </div>
+                        <div class="avatar-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Scroll</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
         <div class="container">
-            <h1>Marvin Daniel</h1>
-            <nav>
-                <ul>
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#projects" class="nav-link">Projetos</a></li>
-                    <li><a href="#skills" class="nav-link">Habilidades</a></li>
-                    <li><a href="#education" class="nav-link">Educação</a></li>
-                    <li><a href="#experience" class="nav-link">Experiência</a></li>
-                    <li><a href="#contact" class="nav-link">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="profile-photo">
-                <img src="eu.jpg" alt="Foto de Marvin" />
+            <div class="section-header">
+                <span class="section-label">Sobre Mim</span>
+                <h2 class="section-title">Transformando ideias em <span class="text-gradient">soluções digitais</span></h2>
+                <p class="section-description">
+                    Estudante de Informática com formação em Eletricidade Industrial, 
+                    combinando conhecimento técnico com paixão pela programação.
+                </p>
             </div>
-            <div class="hero-text">
-                <h2>Olá, sou Marvin Daniel</h2>
-                <p>Estudante de Suporte Informático apaixonado por tecnologia, inovação e desenvolvimento de soluções criativas para o dia a dia.</p>
-                <a href="#contact" class="cta-button">Fale Comigo</a>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-main">
+                        <p>
+                            Tenho <strong>18 anos</strong> e sou estudante de <strong>Programação Web no ITC</strong> 
+                            (Instituto de Transportes e Comunicações), com previsão de conclusão em 2026.
+                        </p>
+                        
+                        <p>
+                            Minha jornada começou na <strong>Eletricidade Industrial</strong>, onde estagiei na 
+                            Compass Engenharia realizando instalações elétricas e montagem de quadros. 
+                            Essa experiência me ensinou disciplina, atenção aos detalhes e resolução de problemas complexos.
+                        </p>
+                        
+                        <p>
+                            Hoje, meu foco é <strong>desenvolvimento web Full Stack</strong>, trabalhando com 
+                            tecnologias como Java, PHP, MySQL e JavaScript. Adoro criar soluções 
+                            que facilitem a vida das pessoas e estou sempre em busca de novos 
+                            desafios para evoluir como profissional.
+                        </p>
+                        
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <i class="fas fa-check"></i>
+                                <span>Trabalho em Equipa</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check"></i>
+                                <span>Resolução de Problemas</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check"></i>
+                                <span>Gestão de Tempo</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check"></i>
+                                <span>Comunicação Efectiva</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-cta">
+                        <a href="#contato" class="btn-primary">
+                            <span>Iniciar Projeto</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="#" class="btn-secondary" id="downloadCV">
+                            <span>Download CV</span>
+                            <i class="fas fa-download"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="skills-preview">
+                        <div class="skill-tag" style="--delay: 0">Java</div>
+                        <div class="skill-tag" style="--delay: 0.1">PHP</div>
+                        <div class="skill-tag" style="--delay: 0.2">JavaScript</div>
+                        <div class="skill-tag" style="--delay: 0.3">MySQL</div>
+                        <div class="skill-tag" style="--delay: 0.4">HTML5</div>
+                        <div class="skill-tag" style="--delay: 0.5">CSS3</div>
+                        <div class="skill-tag" style="--delay: 0.6">Swing</div>
+                        <div class="skill-tag" style="--delay: 0.7">POO</div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <h2 class="section-title">Projetos</h2>
-        <div class="card-grid">
-            <div class="card">
-                <img src="app de transporte.jpg" alt="Aplicativo de transporte">
-                <h3>Aplicativo de Transporte</h3>
-                <p>Inspirado no Uber, com foco nas necessidades de Moçambique.</p>
-            </div>
-            <div class="card">
-                <img src="loja online.jpg" alt="Loja online">
-                <h3>Loja Online</h3>
-                <p>Plataforma que conecta vendedores e compradores com facilidade.</p>
-            </div>
-            <div class="card">
-                <img src="plataforma educacional.jpg" alt="Plataforma Educacional">
-                <h3>Plataforma Educacional</h3>
-                <p>Facilita o aprendizado remoto para estudantes e professores.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills" class="section">
-        <h2 class="section-title">Habilidades</h2>
-        <div class="skills-grid">
-            <div class="skill">HTML e CSS</div>
-            <div class="skill">Suporte Técnico</div>
-            <div class="skill">Manutenção de Computadores</div>
-            <div class="skill">Configuração de Redes</div>
-            <div class="skill">Inglês Avançado</div>
-            <div class="skill">Resolução de Problemas</div>
-        </div>
-    </section>
-
-    <section id="education" class="section">
-        <h2 class="section-title">Educação</h2>
-        <ul class="list">
-            <li><strong>10ª Classe:</strong> Concluída em 2022.</li>
-            <li><strong>CV3:</strong> Eletricidade Industrial.</li>
-            <li><strong>CV4:</strong> Suporte Informático (em andamento).</li>
-            <li><strong>Inglês:</strong> Curso concluído até o 4º nível.</li>
-        </ul>
-    </section>
-
-    <section id="experience" class="section">
-        <h2 class="section-title">Experiência</h2>
-        <p>Atualmente com experiência prática em:</p>
-        <ul class="list">
-            <li>Manutenção e reparação de computadores.</li>
-            <li>Configuração de redes e suporte técnico.</li>
-            <li>Desenvolvimento de projetos pessoais em web design.</li>
-        </ul>
-    </section>
-
-    <section id="contact" class="section contact">
-        <h2 class="section-title">Contato</h2>
-        <p>Entre em contato através das seguintes plataformas:</p>
-        <div class="contact-links">
-            <a href="https://wa.me/258845802676" target="_blank" class="contact-item"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-            <a href="tel:+258845802676" class="contact-item"><i class="fas fa-phone"></i> Telefone</a>
-            <a href="mailto:Marvindaniel450@gmail.com" class="contact-item"><i class="fas fa-envelope"></i> E-mail</a>
-            <a href="https://instagram.com/marvin_daniel.ofc" target="_blank" class="contact-item"><i class="fab fa-instagram"></i> Instagram</a>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2024 Marvin Daniel. Todos os direitos reservados.</p>
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Competências</span>
+                <h2 class="section-title">Habilidades <span class="text-gradient">técnicas</span></h2>
+            </div>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-code"></i>
+                        Programação
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Java</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">PHP</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">JavaScript</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">MySQL</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-laptop-code"></i>
+                        Desenvolvimento
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Java Swing</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">POO</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">CRUD</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Lógica de Programação</span>
+                                <span class="skill-percentage">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="90"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3 class="category-title">
+                        <i class="fas fa-network-wired"></i>
+                        Redes & Ferramentas
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Redes de Computadores</span>
+                                <span class="skill-percentage">75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="75"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Eletricidade Industrial</span>
+                                <span class="skill-percentage">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="80"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">Git</span>
+                                <span class="skill-percentage">70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="70"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span class="skill-name">VS Code</span>
+                                <span class="skill-percentage">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" data-width="85"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projetos">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Portfólio</span>
+                <h2 class="section-title">Projetos <span class="text-gradient">Académicos</span></h2>
+                <p class="section-description">
+                    Alguns dos projetos desenvolvidos durante minha formação académica
+                </p>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Java</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Sistema de Gestão Académica</h3>
+                        <p class="project-description">
+                            Sistema desktop desenvolvido em Java Swing para gestão de alunos, 
+                            professores e disciplinas com integração MySQL.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Swing</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">POO</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-badge">PHP</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Plataforma Web CRUD</h3>
+                        <p class="project-description">
+                            Aplicação web com operações CRUD completas, formulários dinâmicos 
+                            e validação de dados com PHP e JavaScript.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-badge">Redes</div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Simulação de Topologia</h3>
+                        <p class="project-description">
+                            Configuração e simulação de redes locais com diferentes topologias, 
+                            partilha de recursos e configuração de protocolos.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Redes</span>
+                            <span class="tech-tag">TCP/IP</span>
+                            <span class="tech-tag">Configuração</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience" id="experiencia">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Jornada</span>
+                <h2 class="section-title">Experiência <span class="text-gradient">Profissional</span></h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-period">Abril 2025 - Junho 2025</div>
+                        <h3 class="timeline-title">Estagiário - Eletricidade Industrial</h3>
+                        <div class="timeline-company">Compass Engenharia</div>
+                        <p class="timeline-description">
+                            Estágio académico focado em instalações e manutenção elétrica industrial, 
+                            desenvolvendo habilidades técnicas e trabalho em equipa.
+                        </p>
+                        <div class="timeline-tech">
+                            <span>Instalações Elétricas</span>
+                            <span>Manutenção</span>
+                            <span>Quadros Elétricos</span>
+                            <span>Trabalho em Equipa</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-period">2023 - Presente</div>
+                        <h3 class="timeline-title">Projetos Académicos</h3>
+                        <div class="timeline-company">Instituto de Transportes e Comunicações (ITC)</div>
+                        <p class="timeline-description">
+                            Desenvolvimento de diversos projetos académicos em programação, 
+                            bases de dados e redes de computadores durante a formação técnica.
+                        </p>
+                        <div class="timeline-tech">
+                            <span>Java</span>
+                            <span>PHP</span>
+                            <span>MySQL</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-period">2023 - 2025</div>
+                        <h3 class="timeline-title">Formação Técnica</h3>
+                        <div class="timeline-company">CV4 - Informática | ITC</div>
+                        <p class="timeline-description">
+                            Formação completa em informática com foco em programação, 
+                            bases de dados, redes e desenvolvimento de software.
+                        </p>
+                        <div class="timeline-tech">
+                            <span>Programação</span>
+                            <span>Bases de Dados</span>
+                            <span>Redes</span>
+                            <span>Desenvolvimento Web</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education" id="educacao">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Formação</span>
+                <h2 class="section-title">Educação <span class="text-gradient">Académica</span></h2>
+            </div>
+            
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="education-content">
+                        <h3>CV5 - Programação Web</h3>
+                        <div class="education-place">Instituto de Transportes e Comunicações</div>
+                        <div class="education-period">Previsão de Conclusão: 2026</div>
+                        <div class="education-status">Em Curso</div>
+                    </div>
+                </div>
+                
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-computer"></i>
+                    </div>
+                    <div class="education-content">
+                        <h3>CV4 - Informática</h3>
+                        <div class="education-place">Instituto de Transportes e Comunicações</div>
+                        <div class="education-period">Concluído: 2025</div>
+                        <div class="education-status">Concluído</div>
+                    </div>
+                </div>
+                
+                <div class="education-card">
+                    <div class="education-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="education-content">
+                        <h3>CV3 - Informática</h3>
+                        <div class="education-place">Instituto de Transportes e Comunicações</div>
+                        <div class="education-period">Concluído: 2023</div>
+                        <div class="education-status">Concluído</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contato">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="section-header">
+                        <span class="section-label">Contacto</span>
+                        <h2 class="section-title">Vamos <span class="text-gradient">conversar</span></h2>
+                        <p class="section-description">
+                            Estou disponível para oportunidades de estágio, projetos 
+                            colaborativos e novos desafios na área de tecnologia.
+                        </p>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Telefone</h4>
+                                <a href="tel:+258878502676">+258 878 502 676</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Email</h4>
+                                <a href="mailto:marvindaniel450@gmail.com">marvindaniel450@gmail.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Localização</h4>
+                                <span>Matola, Bairro Mussumbuluco</span>
+                                <span>Maputo, Moçambique</span>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>WhatsApp</h4>
+                                <a href="https://wa.me/258845802676">+258 845 802 676</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/Marvin-cod333" class="social-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.instagram.com/marvin_daniel.ofc" class="social-link" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/258845802676" class="social-link" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="mailto:marvindaniel450@gmail.com" class="social-link">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Assunto</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <span>Enviar Mensagem</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo-text">MDC</div>
+                    <p class="footer-description">
+                        Estudante de Informática e Desenvolvedor Full Stack 
+                        apaixonado por tecnologia e inovação.
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navegação</h4>
+                        <a href="#hero">Início</a>
+                        <a href="#sobre">Sobre</a>
+                        <a href="#skills">Skills</a>
+                        <a href="#projetos">Projetos</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Contacto</h4>
+                        <a href="tel:+258878502676">+258 878 502 676</a>
+                        <a href="mailto:marvindaniel450@gmail.com">Email</a>
+                        <a href="https://wa.me/258845802676">WhatsApp</a>
+                        <a href="#contato">Formulário</a>
+                    </div>
+                    
+                    <div class="footer-column">
+                        <h4>Social</h4>
+                        <a href="https://github.com/Marvin-cod333" target="_blank">GitHub</a>
+                        <a href="https://www.instagram.com/marvin_daniel.ofc" target="_blank">Instagram</a>
+                        <a href="https://wa.me/258845802676" target="_blank">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Marvin Daniel Cossa. Todos os direitos reservados.</p>
+                <p>Desenvolvido com paixão em Moçambique 🇲🇿</p>
+            </div>
+        </div>
     </footer>
+
+    <script src="javascript.js"></script>
 </body>
 </html>
