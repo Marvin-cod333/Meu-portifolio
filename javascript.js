@@ -1,4 +1,4 @@
-// script.js
+// script.js - CORRIGIDO
 
 // Configurações Globais
 const CONFIG = {
@@ -35,7 +35,7 @@ class PortfolioApp {
     setup() {
         this.setupTheme();
         this.setupLoading();
-        this.setupNavigation();
+        this.setupNavigation(); // PRIMEIRO - Garantir que navegação funcione
         this.setupAnimations();
         this.setupInteractions();
         this.setupForms();
@@ -128,6 +128,170 @@ class PortfolioApp {
         this.setupScrollEffects();
     }
 
+    // CORREÇÃO DO MENU HAMBURGER - MÉTODO ATUALIZADO
+    setupNavigation() {
+        const hamburger = document.getElementById('navHamburger');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const body = document.body;
+
+        console.log('🔍 Elementos do menu:', { hamburger, navMenu, navLinks });
+
+        // Função para alternar menu
+        const toggleMenu = () => {
+            STATE.isMenuOpen = !STATE.isMenuOpen;
+            
+            if (navMenu) {
+                if (STATE.isMenuOpen) {
+                    navMenu.style.display = 'flex';
+                    setTimeout(() => {
+                        navMenu.classList.add('active');
+                    }, 10);
+                } else {
+                    navMenu.classList.remove('active');
+                    setTimeout(() => {
+                        navMenu.style.display = 'none';
+                    }, 300);
+                }
+            }
+
+            if (hamburger) {
+                hamburger.classList.toggle('active', STATE.isMenuOpen);
+            }
+
+            // Bloquear/liberar scroll do body
+            body.style.overflow = STATE.isMenuOpen ? 'hidden' : '';
+            body.style.height = STATE.isMenuOpen ? '100vh' : '';
+
+            console.log('🍔 Menu estado:', STATE.isMenuOpen ? 'ABERTO' : 'FECHADO');
+        };
+
+        // Event listener para hamburger
+        if (hamburger) {
+            hamburger.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            });
+
+            console.log('✅ Hamburger listener adicionado');
+        }
+
+        // Fechar menu ao clicar nos links
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (STATE.isMenuOpen) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (STATE.isMenuOpen && 
+                navMenu && 
+                !navMenu.contains(e.target) && 
+                hamburger && 
+                !hamburger.contains(e.target)) {
+                toggleMenu();
+            }
+        });
+
+        // Fechar menu com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && STATE.isMenuOpen) {
+                toggleMenu();
+            }
+        });
+
+        this.setupSmoothScroll();
+        this.setupNavbarScroll();
+    }
+
+    setupSmoothScroll() {
+        const links = document.querySelectorAll('a[href^="#"]');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 80;
+                    
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+
+                    // Fechar menu mobile se estiver aberto
+                    if (STATE.isMenuOpen) {
+                        this.closeMobileMenu();
+                    }
+                }
+            });
+        });
+    }
+
+    // Método auxiliar para fechar menu mobile
+    closeMobileMenu() {
+        const hamburger = document.getElementById('navHamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        STATE.isMenuOpen = false;
+        
+        if (navMenu) {
+            navMenu.classList.remove('active');
+            setTimeout(() => {
+                navMenu.style.display = 'none';
+            }, 300);
+        }
+        
+        if (hamburger) {
+            hamburger.classList.remove('active');
+        }
+        
+        document.body.style.overflow = '';
+        document.body.style.height = '';
+    }
+
+    setupNavbarScroll() {
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            const scrollDelta = currentScroll - lastScroll;
+
+            if (navbar) {
+                if (currentScroll > 100) {
+                    navbar.style.background = 'var(--bg-primary)';
+                    navbar.style.backdropFilter = 'blur(20px)';
+                    
+                    if (scrollDelta > 0 && currentScroll > 200 && !STATE.isMenuOpen) {
+                        // Scroll para baixo - esconder navbar apenas se menu não estiver aberto
+                        navbar.style.transform = 'translateY(-100%)';
+                    } else {
+                        // Scroll para cima - mostrar navbar
+                        navbar.style.transform = 'translateY(0)';
+                    }
+                } else {
+                    // Topo da página
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                    if (STATE.currentTheme === 'dark') {
+                        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+                    }
+                    navbar.style.transform = 'translateY(0)';
+                }
+            }
+
+            lastScroll = currentScroll;
+            STATE.scrollPosition = currentScroll;
+        });
+    }
+
     // Sistema de Partículas
     initParticles() {
         if (!CONFIG.enableParticles) return;
@@ -135,7 +299,7 @@ class PortfolioApp {
         const particlesContainer = document.getElementById('particles');
         if (!particlesContainer) return;
 
-        const particleCount = window.innerWidth < 768 ? 30 : 50;
+        const particleCount = window.innerWidth < 768 ? 20 : 50;
 
         for (let i = 0; i < particleCount; i++) {
             this.createParticle(particlesContainer);
@@ -153,7 +317,7 @@ class PortfolioApp {
         const particle = document.createElement('div');
         particle.className = 'particle';
         
-        const size = Math.random() * 4 + 1;
+        const size = Math.random() * 3 + 1;
         const posX = Math.random() * 100;
         const delay = Math.random() * 20;
         const duration = Math.random() * 10 + 15;
@@ -244,86 +408,6 @@ class PortfolioApp {
         updateCursor();
     }
 
-    // Sistema de Navegação
-    setupNavigation() {
-        const hamburger = document.getElementById('navHamburger');
-        const navMenu = document.getElementById('navMenu');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        hamburger?.addEventListener('click', () => {
-            STATE.isMenuOpen = !STATE.isMenuOpen;
-            hamburger.classList.toggle('active', STATE.isMenuOpen);
-            navMenu.classList.toggle('active', STATE.isMenuOpen);
-            document.body.style.overflow = STATE.isMenuOpen ? 'hidden' : '';
-        });
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                STATE.isMenuOpen = false;
-                hamburger?.classList.remove('active');
-                navMenu?.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        this.setupSmoothScroll();
-        this.setupNavbarScroll();
-    }
-
-    setupSmoothScroll() {
-        const links = document.querySelectorAll('a[href^="#"]');
-        
-        links.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    const offsetTop = targetElement.offsetTop - 80;
-                    
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    }
-
-    setupNavbarScroll() {
-        const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            const scrollDelta = currentScroll - lastScroll;
-
-            if (navbar) {
-                if (currentScroll > 100) {
-                    navbar.style.background = 'var(--bg-primary)';
-                    navbar.style.backdropFilter = 'blur(20px)';
-                    
-                    if (scrollDelta > 0 && currentScroll > 200) {
-                        navbar.style.transform = 'translateY(-100%)';
-                    } else {
-                        navbar.style.transform = 'translateY(0)';
-                    }
-                } else {
-                    navbar.style.background = 'rgba(255, 255, 255, 0.9)';
-                    if (STATE.currentTheme === 'dark') {
-                        navbar.style.background = 'rgba(15, 23, 42, 0.9)';
-                    }
-                    navbar.style.transform = 'translateY(0)';
-                }
-            }
-
-            lastScroll = currentScroll;
-            STATE.scrollPosition = currentScroll;
-        });
-    }
-
     // Sistema de Animações
     setupAnimations() {
         if (!CONFIG.enableAnimations) return;
@@ -401,6 +485,8 @@ class PortfolioApp {
         
         tiltElements.forEach(element => {
             element.addEventListener('mousemove', (e) => {
+                if (window.innerWidth < 768) return; // Desativar em mobile
+                
                 const rect = element.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
@@ -457,8 +543,10 @@ class PortfolioApp {
         });
     }
 
-    downloadCV() {
-        const cvUrl = 'Marvin Daniel Cossa.pdf';
+downloadCV() {
+    try {
+        // CORREÇÃO: Use o nome correto do arquivo
+        const cvUrl = 'Marvin_Daniel_Cossa_CV.pdf';
         
         this.showNotification('Iniciando download do CV...', 'info');
         
@@ -474,7 +562,12 @@ class PortfolioApp {
         setTimeout(() => {
             this.showNotification('CV baixado com sucesso!', 'success');
         }, 1000);
+
+    } catch (error) {
+        console.error('Erro no download:', error);
+        this.showNotification('Erro no download. Tente novamente.', 'error');
     }
+}
 
     setupProjectInteractions() {
         const projectCards = document.querySelectorAll('.project-card');
@@ -484,7 +577,7 @@ class PortfolioApp {
             const overlay = card.querySelector('.project-overlay');
             
             card.addEventListener('mousemove', (e) => {
-                if (!image) return;
+                if (!image || window.innerWidth < 768) return;
                 
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -591,7 +684,7 @@ class PortfolioApp {
             errorElement.textContent = message;
             errorElement.style.cssText = `
                 color: #dc2626;
-                font-size: 0.875rem;
+                font-size: 0.75rem;
                 margin-top: 0.25rem;
                 display: block;
             `;
@@ -662,31 +755,40 @@ class PortfolioApp {
 
         notification.style.cssText = `
             position: fixed;
-            top: 100px;
-            right: 20px;
+            top: 80px;
+            right: 16px;
+            left: 16px;
             background: ${type === 'success' ? '#059669' : '#dc2626'};
             color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            padding: 12px 16px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.3);
             z-index: 10000;
-            transform: translateX(400px);
+            transform: translateY(-100px);
             transition: transform 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            font-size: 14px;
         `;
+
+        // Ajuste para mobile
+        if (window.innerWidth < 768) {
+            notification.style.left = '16px';
+            notification.style.right = '16px';
+            notification.style.top = '70px';
+        }
 
         document.body.appendChild(notification);
 
         setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
+            notification.style.transform = 'translateY(0)';
         }, 100);
 
         setTimeout(() => {
-            notification.style.transform = 'translateX(400px)';
+            notification.style.transform = 'translateY(-100px)';
             setTimeout(() => notification.remove(), 300);
-        }, 5000);
+        }, 4000);
     }
 
     // Scroll Effects
@@ -751,74 +853,19 @@ class PortfolioApp {
             }, 100);
         });
     }
-
-    // Métodos públicos para extensão
-    getState() {
-        return { ...STATE };
-    }
-
-    updateConfig(newConfig) {
-        Object.assign(CONFIG, newConfig);
-    }
 }
 
 // Inicializar aplicação
 const portfolioApp = new PortfolioApp();
 
-// Service Worker para PWA (Opcional)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}
-
-// Web Vitals para métricas de performance
-const reportWebVitals = (onPerfEntry) => {
-    if (onPerfEntry && onPerfEntry instanceof Function) {
-        import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-            getCLS(onPerfEntry);
-            getFID(onPerfEntry);
-            getFCP(onPerfEntry);
-            getLCP(onPerfEntry);
-            getTTFB(onPerfEntry);
-        });
-    }
-};
-
-// Hotkeys para desenvolvimento
-if (process.env.NODE_ENV === 'development') {
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.key === 'd') {
-            e.preventDefault();
-            portfolioApp.updateConfig({ enableCursor: !CONFIG.enableCursor });
-        }
-        
-        if (e.ctrlKey && e.key === 'a') {
-            e.preventDefault();
-            portfolioApp.updateConfig({ enableAnimations: !CONFIG.enableAnimations });
-        }
-    });
-}
+// Debug helper
+console.log('🚀 Portfolio App Inicializado');
+console.log('📱 Menu Hamburger deve estar funcionando agora!');
 
 // Exportar para uso global
 window.PortfolioApp = portfolioApp;
-window.reportWebVitals = reportWebVitals;
 
-console.log(`
-╔══════════════════════════════════════╗
-║    PORTFÓLIO MARVIN COSSA ATIVO     ║
-║                                      ║
-║  ✅ Tema claro/escuro               ║
-║  ✅ Download do CV funcional        ║
-║  ✅ Formulário de contacto          ║
-║  ✅ Animações smooth                ║
-║  ✅ Design responsivo               ║
-║                                      ║
-╚══════════════════════════════════════╝
-`);
+// Hot reload helper para desenvolvimento
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    console.log('🔧 Modo desenvolvimento ativo');
+} 
